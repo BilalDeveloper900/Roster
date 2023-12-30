@@ -4,6 +4,18 @@
   box-sizing: border-box;
 }
 
+.pointer:hover {
+  cursor: pointer;
+}
+
+#color {
+  color: #1e64a0;
+}
+
+.color1 {
+  color: #8f8e94;
+}
+
 .login-outer {
   display: flex;
   align-items: center;
@@ -188,6 +200,23 @@ html {
   margin: auto;
   border-radius: 5px;
   color: black;
+  background-color: white;
+}
+.footer .scan-member {
+  width: 90%;
+  padding: 10px;
+  border-radius: 30px;
+  color: white;
+  background-color: #1e64a0;
+  margin: auto;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+.footer .scan-member i {
+  padding-right: 10px;
+}
+.footer .scan-member b {
+  padding-left: 10px;
 }
 
 @media (max-width: 700px) {
@@ -272,6 +301,7 @@ hr {
   margin: auto;
   border-radius: 10px;
   box-shadow: 0px 0px 4px 1px rgba(57, 56, 56, 0.75);
+  margin-bottom: 15px;
 }
 .box .hr {
   height: 23vh;
@@ -283,6 +313,10 @@ hr {
 .box .box-in {
   padding: 10px;
   border-radius: 10px;
+  color: #8f8e94;
+}
+.box .box-in span {
+  color: #111;
 }
 .box .box-in .box-1 {
   display: flex !important;
@@ -315,4 +349,65 @@ hr {
   display: block;
   width: 120px;
   color: #1e64a0;
+}
+
+.tripList-outer .tripList-main .header {
+  background-color: #1e64a0;
+  color: white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.tripList-outer .tripList-main .header .first-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 20px;
+  align-items: center;
+}
+.tripList-outer .tripList-main .header .first-header .date {
+  padding-left: 15px;
+}
+.tripList-outer .tripList-main .header .first-header i {
+  padding-left: 4px;
+}
+.tripList-outer .tripList-main .header .first-header .dot {
+  color: #14446b;
+}
+.tripList-outer .tripList-main .header .second-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 11px 20px;
+}
+.tripList-outer .tripList-main .header .second-header i {
+  font-size: 16px;
+}
+.tripList-outer .tripList-main .header .second-header b {
+  padding-left: 14px;
+}
+.tripList-outer .tripList-main .header .second-header .first {
+  padding-right: 22px;
+  font-size: 15px;
+}
+.tripList-outer .tripList-main .header .second-header .second {
+  padding-right: 1px;
+  font-size: 15px;
+}
+.tripList-outer .tripList-main .total {
+  display: flex;
+  justify-content: end;
+}
+
+.member-list {
+  width: 33.33%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin: auto;
+}
+.member-list .list-id {
+  color: #8f8e94;
+}
+.member-list .list-status {
+  border: 1px solid #14446b;
+  padding: 5px 15px;
+  border-radius: 25px;
 }/*# sourceMappingURL=App.css.map */

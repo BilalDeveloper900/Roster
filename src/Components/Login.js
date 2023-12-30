@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import login from "../Stores/Slices";
-import { api } from "../Stores/Intercepter";
+import { login } from "../Stores/Slices";
+
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -15,8 +15,8 @@ function Login() {
       email,
       password,
     };
-    api.post(`/auth/login`, payload).then((res) => {
-      const token = res.data.data.access_token;
+    dispatch(login(payload)).then((res) => {
+      const token = res.payload.data.access_token;
       localStorage.setItem("token", token);
 
       navigate("/dashboard");

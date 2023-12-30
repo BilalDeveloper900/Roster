@@ -4,6 +4,7 @@ import Login from "./Components/Login";
 import Dashboard from "./Components/Dashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Today from "./Components/Today";
+import TripList from "./Components/TripList";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/today" element={<Today />} />
+        <Route path="/tripList" element={<TripList />} />
       </Routes>
     </Router>
   );

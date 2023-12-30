@@ -2,7 +2,7 @@ import axios from "axios";
 // import { useNavigate } from 'react-router'
 // import { toast } from "react-toastify";
 
-const API_BASE_URL = "https://dev.snowflakeclub.org/api";
+const API_BASE_URL = `https://dev.snowflakeclub.org/`;
 // admin
 
 // Create an Axios instance with the base URL

@@ -4,9 +4,15 @@ import { useNavigate } from "react-router";
 
 function Dashboard() {
   const navigate = useNavigate();
+
   const handelToday = () => {
     navigate("/today");
   };
+
+  const tripList = () => {
+    navigate("/tripList");
+  };
+
   return (
     <div>
       <div className="dashboard-outer">
@@ -54,7 +60,9 @@ function Dashboard() {
           </div>
 
           <div className="trip">
-            <b onClick={handelToday}>Today's Trip</b>
+            <b onClick={handelToday} className="pointer">
+              Today's Trip
+            </b>
           </div>
 
           <div className="no-trip" align="center">
@@ -62,19 +70,19 @@ function Dashboard() {
           </div>
 
           <div className="container">
-            <div className="box-1">
-              <i class="fa-regular fa-clipboard"></i>
+            <div className="box-1 pointer" onClick={tripList}>
+              <i class="fa-regular fa-clipboard "></i>
               <b>Trip List</b>
             </div>
 
-            <div className="box-2">
-              <i class="fa-regular fa-user"></i>
+            <div className="box-2 pointer">
+              <i class="fa-regular fa-user "></i>
               <b>Profile</b>
             </div>
           </div>
 
           <div className="container">
-            <div className="box-3">
+            <div className="box-3 pointer">
               {/* <i class="fa-solid fa-arrow-right-from-bracket"></i> */}
               <BoxArrowInLeft size={30} />
               <b>Logout</b>

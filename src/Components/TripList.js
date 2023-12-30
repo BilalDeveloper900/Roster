@@ -2,30 +2,32 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { trips } from "../Stores/Slices";
+import TripListTab from "./TripListTab";
 
-function Today() {
+function TripList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [tripData, setTripData] = useState();
 
-  const trip = () => {
+  const Members = () => {
     dispatch(trips()).then((res) => {
       setTripData(res.payload.data.trips);
-      console.log(tripData, "trips-Data");
+      console.log(tripData, "trips");
     });
   };
 
   useEffect(() => {
-    trip();
+    Members();
   }, []);
 
   const handleBack = () => {
     navigate("/dashboard");
   };
+
   return (
-    <div className="today-outer">
-      <div className="today-main">
-        <div className="header">
+    <div className="tripList-outer">
+      <div className="tripList-main">
+        <div className="header mb-3">
           <div className="first-header">
             <span className="date">
               <b>11:03</b>
@@ -40,16 +42,11 @@ function Today() {
                   paddingLeft: "5px",
                 }}
               ></i>
-              <b
-                style={{
-                  fontWeight: "bold",
-                  fontSize: "14px",
-                  paddingLeft: "5px",
-                }}
-              >
-                LTE
-              </b>
-              <i className="fa-solid fa-battery-quarter"></i>
+              <i className="fa-solid fa-wifi"></i>
+              <i
+                className="fa fa-battery-three-quarters"
+                aria-hidden="true"
+              ></i>
             </div>
           </div>
           <div className="second-header">
@@ -69,38 +66,14 @@ function Today() {
           </div>
         </div>
 
-        <div className="search-box">
-          <div className="search">
-            <i className="fa fa-search ms-auto  " aria-hidden="true" />
-            <input type="text" className="input" placeholder="Search by name" />
-          </div>
-        </div>
-
-        <div className="trip">
-          <b>Today</b>
-
-          <div className="calender">
-            <b>12/26/2023</b>
-            <i className="fa-regular fa-calendar"></i>
-          </div>
-        </div>
-
-        <div className="no-trip" align="center">
-          <b>No Trip for Today</b>
-        </div>
-
-        <div className="next-trip">
-          <b>Next Trips</b>
-        </div>
-
         {tripData &&
           tripData.map((value, index) => (
             <div className="box" key={index}>
-              <div className="hr" />
               <div className="box-in">
                 <div className="text">
-                  Trip Name:
-                  <span>{value.name}</span>
+                  <span id="color">
+                    <b>{value.name}</b>
+                  </span>
                 </div>
 
                 <div>
@@ -109,12 +82,12 @@ function Today() {
 
                 <div className="box-1">
                   <div className="first">
-                    Trip Seats: <span>50</span>{" "}
-                    <span>({value.trip_seats} left)</span> <br />
+                    Trip Seats: <span>{value.trip_seats}</span>{" "}
+                    <span>({value.trip_available_seats} left)</span> <br />
                     AM-ON-BUS: <span>{value.am_on_bus_count}</span> <br />
                     PARENT PICKED UP: <span>0</span>
                   </div>
-                  <div className="second">
+                  <div className="second pb-1">
                     Trip Members: <span>{value.trip_sold_seats}</span>
                     <br />
                     PM-RETURN: <span>{value.pm_return_count}</span>
@@ -123,12 +96,51 @@ function Today() {
                   </div>
                 </div>
 
-                <span className="view-details ms-auto">View Details</span>
+                <div className="pt-1">
+                  Bus stops locations:{" "}
+                  <span>({value.trip_locations_count})</span>
+                </div>
+
+                <div className="total">Total / Sold / Available</div>
+
+                <div className="d-flex justify-content-between">
+                  <span id="color">Highland park</span>
+                  <div className="total ">
+                    {value.trip_seats} / {value.trip_sold_seats} /{" "}
+                    {value.trip_available_seats}
+                  </div>
+                </div>
               </div>
             </div>
           ))}
 
+        <div className="box ">
+          <div className="p-3 pb-0">
+            Trip Members: <span>(8)</span>
+          </div>
+
+          <div className="search-box pb-3">
+            <div className="search">
+              <i className="fa fa-search ms-auto  " aria-hidden="true" />
+              <input
+                type="text"
+                className="input"
+                placeholder="Search by name"
+              />
+            </div>
+          </div>
+
+          <div className="pb-5">
+            <TripListTab className="pb-5" />
+          </div>
+        </div>
+
         <div className="footer">
+          <div className="scan-member">
+            <i className="fa-solid fa-qrcode first"></i>
+
+            <b>Scan Member</b>
+          </div>
           <hr />
         </div>
       </div>
@@ -136,4 +148,4 @@ function Today() {
   );
 }
 
-export default Today;
+export default TripList;
