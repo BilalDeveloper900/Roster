@@ -60,9 +60,7 @@ function Dashboard() {
           </div>
 
           <div className="trip">
-            <b onClick={handelToday} className="pointer">
-              Today's Trip
-            </b>
+            <b className="pointer">Today's Trip</b>
           </div>
 
           <div className="no-trip" align="center">
@@ -70,7 +68,7 @@ function Dashboard() {
           </div>
 
           <div className="container">
-            <div className="box-1 pointer" onClick={tripList}>
+            <div className="box-1 pointer" onClick={handelToday}>
               <i class="fa-regular fa-clipboard "></i>
               <b>Trip List</b>
             </div>

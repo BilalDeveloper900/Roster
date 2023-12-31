@@ -348,6 +348,7 @@ hr {
   border: 1px solid #1e64a0;
   display: block;
   width: 120px;
+  cursor: pointer;
   color: #1e64a0;
 }
 
@@ -356,6 +357,9 @@ hr {
   color: white;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 .tripList-outer .tripList-main .header .first-header {
   display: flex;
@@ -402,12 +406,34 @@ hr {
   text-align: center;
   justify-content: center;
   margin: auto;
+  align-items: center;
 }
 .member-list .list-id {
   color: #8f8e94;
 }
-.member-list .list-status {
-  border: 1px solid #14446b;
-  padding: 5px 15px;
+
+.am-bus {
+  outline: green;
+  background-color: lightgreen;
+  color: green;
+  border: 1px solid green;
   border-radius: 25px;
+  width: 200px;
+  font-size: 13px;
+  padding: 3px 0px;
+}
+
+.pm-bus {
+  outline-color: red;
+  background: lightpink;
+  color: red;
+  border: 1px solid red;
+  border-radius: 25px;
+  width: 200px;
+  font-size: 13px;
+  padding: 3px 0px;
+}
+
+.tp {
+  margin-bottom: 200px !important;
 }/*# sourceMappingURL=App.css.map */

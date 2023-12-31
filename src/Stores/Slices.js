@@ -13,8 +13,14 @@ export const trips = createAsyncThunk("trips", async () => {
   return response.data;
 });
 
-export const members = createAsyncThunk("members", async () => {
-  const response = await api.get("api-staff/trips/18/members");
+export const tripDetail = createAsyncThunk("tripDetail", async (id) => {
+  const response = await api.get(`api-staff/trips/${id}`);
+  console.log(response);
+  return response.data;
+});
+
+export const tripMembers = createAsyncThunk("tripMembers", async (id) => {
+  const response = await api.get(`api-staff/trips/${id}/members`);
   console.log(response);
   return response.data;
 });
@@ -24,7 +30,8 @@ const projectSlice = createSlice({
   initialState: {
     login: [],
     trips: [],
-    members: [],
+    tripMembers: [],
+    tripDetail: [],
     error: null,
   },
   extraReducers: (builder) => {
@@ -33,12 +40,16 @@ const projectSlice = createSlice({
         state.login = action.payload;
         state.error = null;
       })
-      .addCase(members.fulfilled, (state, action) => {
-        state.members = action.payload;
+      .addCase(tripMembers.fulfilled, (state, action) => {
+        state.tripMembers = action.payload;
         state.error = null;
       })
       .addCase(trips.fulfilled, (state, action) => {
         state.trips = action.payload;
+        state.error = null;
+      })
+      .addCase(tripDetail.fulfilled, (state, action) => {
+        state.tripDetail = action.payload;
         state.error = null;
       });
   },

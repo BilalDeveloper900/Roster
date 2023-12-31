@@ -15,6 +15,10 @@ function Today() {
     });
   };
 
+  const handleDetail = (tripId) => {
+    navigate(`/tripList/${tripId}`);
+  };
+
   useEffect(() => {
     trip();
   }, []);
@@ -123,7 +127,12 @@ function Today() {
                   </div>
                 </div>
 
-                <span className="view-details ms-auto">View Details</span>
+                <span
+                  className="view-details ms-auto"
+                  onClick={() => handleDetail(value.id)}
+                >
+                  View Details
+                </span>
               </div>
             </div>
           ))}

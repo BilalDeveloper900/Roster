@@ -4,8 +4,9 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useDispatch } from "react-redux";
-import { members } from "../Stores/Slices";
+import { tripMembers } from "../Stores/Slices";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -40,7 +41,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function BasicTabs() {
+export default function BasicTabs(props) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -48,49 +49,57 @@ export default function BasicTabs() {
   };
 
   const dispatch = useDispatch();
-
+  const { id } = useParams();
   const [memberData, setMemberData] = useState();
   const [memberData1, setMemberData1] = useState();
   const [memberData2, setMemberData2] = useState();
 
   const firstMember = () => {
-    dispatch(members()).then((res) => {
+    dispatch(tripMembers(id)).then((res) => {
       setMemberData(res.payload.data.all_members.members);
-      console.log(memberData, "member---data");
-    });
-  };
-
-  const secondMember = () => {
-    dispatch(members()).then((res) => {
       setMemberData1(res.payload.data.am_on_bus.members);
-      console.log(memberData1, "member---data");
-    });
-  };
-
-  const thirdMember = () => {
-    dispatch(members()).then((res) => {
       setMemberData2(res.payload.data.pm_return.members);
-      console.log(memberData2, "member---data");
+      console.log(memberData, "member---data");
     });
   };
 
   useEffect(() => {
     firstMember();
-    secondMember();
-    thirdMember();
   }, []);
 
+  const [search, setSearch] = useState("");
+  const handleSearch = (e) => {
+    setSearch(e.target.value.toLowerCase());
+  };
+
   return (
-    <Box sx={{ width: "100%" }} className="px-3">
+    <Box sx={{ width: "100%" }} className="px-3 ">
       <Box sx={{ borderBottom: 0, borderColor: "divider" }}>
+        <div className="p-3 pb-0">
+          Trip Members: <span>({props.number})</span>
+        </div>
+
+        <div className="search-box pb-3">
+          <div className="search">
+            <i className="fa fa-search ms-auto  " aria-hidden="true" />
+            <input
+              type="text"
+              className="input"
+              placeholder="Search"
+              value={search}
+              onChange={handleSearch}
+            />
+          </div>
+        </div>
+
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="All" {...a11yProps(0)} sx={{ width: "33.33%" }} />
-          <Tab label="AM-ON-BUS" {...a11yProps(1)} sx={{ width: "33.33%" }} />
-          <Tab label="PM-RETURN" {...a11yProps(2)} sx={{ width: "33.33%" }} />
+          <Tab label="All" {...a11yProps(0)} sx={{ width: "33%" }} />
+          <Tab label="AM-ON-BUS" {...a11yProps(1)} sx={{ width: "33%" }} />
+          <Tab label="PM-RETURN" {...a11yProps(2)} sx={{ width: "34%" }} />
         </Tabs>
       </Box>
 
@@ -101,23 +110,37 @@ export default function BasicTabs() {
           <p>STATUS</p>
         </div>
         {memberData &&
-          memberData.map((value, index) => (
-            <div className="d-flex justify-content-around" key={index}>
-              <span className="member-list ">
-                <p>
-                  {value.first_name} {value.last_name}
-                </p>
-              </span>
+          memberData
+            .filter(
+              (x) =>
+                x.first_name.toLowerCase().includes(search) ||
+                x.last_name.toLowerCase().includes(search)
+            )
+            .map((value, index) => (
+              <div className="d-flex justify-content-around" key={index}>
+                <span className="member-list ">
+                  <p>
+                    {value.first_name} {value.last_name}
+                  </p>
+                </span>
 
-              <span className="member-list ">
-                <p className="list-id">#{value.id}</p>
-              </span>
+                <span className="member-list ">
+                  <p className="list-id">#{value.id}</p>
+                </span>
 
-              <span className="member-list ">
-                <p className="list-status">{value.boarding_status}</p>
-              </span>
-            </div>
-          ))}
+                <span className="member-list ">
+                  <p
+                    className={
+                      value.boarding_status === "AM-ON-BUS"
+                        ? "am-bus"
+                        : "pm-bus"
+                    }
+                  >
+                    {value.boarding_status}
+                  </p>
+                </span>
+              </div>
+            ))}
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={1}>
@@ -127,23 +150,37 @@ export default function BasicTabs() {
           <p>STATUS</p>
         </div>
         {memberData1 &&
-          memberData1.map((value, index) => (
-            <div className="d-flex justify-content-around" key={index}>
-              <span className="member-list ">
-                <p>
-                  {value.first_name} {value.last_name}
-                </p>
-              </span>
+          memberData1
+            .filter(
+              (x) =>
+                x.first_name.toLowerCase().includes(search) ||
+                x.last_name.toLowerCase().includes(search)
+            )
+            .map((value, index) => (
+              <div className="d-flex justify-content-around" key={index}>
+                <span className="member-list ">
+                  <p>
+                    {value.first_name} {value.last_name}
+                  </p>
+                </span>
 
-              <span className="member-list ">
-                <p className="list-id">#{value.id}</p>
-              </span>
+                <span className="member-list ">
+                  <p className="list-id">#{value.id}</p>
+                </span>
 
-              <span className="member-list ">
-                <p className="list-status">{value.boarding_status}</p>
-              </span>
-            </div>
-          ))}
+                <span className="member-list ">
+                  <p
+                    className={
+                      value.boarding_status === "AM-ON-BUS"
+                        ? "am-bus"
+                        : "pm-bus"
+                    }
+                  >
+                    {value.boarding_status}
+                  </p>
+                </span>
+              </div>
+            ))}
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={2}>
@@ -153,23 +190,40 @@ export default function BasicTabs() {
           <p>STATUS</p>
         </div>
         {memberData2 &&
-          memberData2.map((value, index) => (
-            <div className="d-flex justify-content-around" key={index}>
-              <span className="member-list ">
-                <p>
-                  {value.first_name} {value.last_name}
-                </p>
-              </span>
+          memberData2
+            .filter(
+              (x) =>
+                x.first_name.toLowerCase().includes(search) ||
+                x.last_name.toLowerCase().includes(search)
+            )
+            .map((value, index) => (
+              <div
+                className="d-flex justify-content-around member-outer"
+                key={index}
+              >
+                <span className="member-list ">
+                  <p>
+                    {value.first_name} {value.last_name}
+                  </p>
+                </span>
 
-              <span className="member-list ">
-                <p className="list-id">#{value.id}</p>
-              </span>
+                <span className="member-list ">
+                  <p className="list-id">#{value.id}</p>
+                </span>
 
-              <span className="member-list ">
-                <p className="list-status">{value.boarding_status}</p>
-              </span>
-            </div>
-          ))}
+                <span className="member-list ">
+                  <p
+                    className={
+                      value.boarding_status === "AM-ON-BUS"
+                        ? "am-bus"
+                        : "pm-bus"
+                    }
+                  >
+                    {value.boarding_status}
+                  </p>
+                </span>
+              </div>
+            ))}
       </CustomTabPanel>
     </Box>
   );
