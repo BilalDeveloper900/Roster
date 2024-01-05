@@ -133,7 +133,11 @@ export default function BasicTabs(props) {
                     className={
                       value.boarding_status === "AM-ON-BUS"
                         ? "am-bus"
-                        : "pm-bus"
+                        : value.boarding_status === "PM-RETURN"
+                        ? "pm-bus"
+                        : value.boarding_status === "Waiting"
+                        ? "waiting"
+                        : "undefine"
                     }
                   >
                     {value.boarding_status}
@@ -173,7 +177,11 @@ export default function BasicTabs(props) {
                     className={
                       value.boarding_status === "AM-ON-BUS"
                         ? "am-bus"
-                        : "pm-bus"
+                        : value.boarding_status === "PM-RETURN"
+                        ? "pm-bus"
+                        : value.boarding_status === "Waiting"
+                        ? "waiting"
+                        : "undefine"
                     }
                   >
                     {value.boarding_status}
@@ -216,7 +224,11 @@ export default function BasicTabs(props) {
                     className={
                       value.boarding_status === "AM-ON-BUS"
                         ? "am-bus"
-                        : "pm-bus"
+                        : value.boarding_status === "PM-RETURN"
+                        ? "pm-bus"
+                        : value.boarding_status === "Waiting"
+                        ? "waiting"
+                        : "undefine"
                     }
                   >
                     {value.boarding_status}

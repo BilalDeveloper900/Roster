@@ -201,6 +201,7 @@ html {
   border-radius: 5px;
   color: black;
   background-color: white;
+  max-width: 450px !important;
 }
 .footer .scan-member {
   width: 90%;
@@ -211,6 +212,7 @@ html {
   margin: auto;
   margin-bottom: 30px;
   margin-top: 10px;
+  cursor: pointer;
 }
 .footer .scan-member i {
   padding-right: 10px;
@@ -226,11 +228,15 @@ html {
     margin: auto;
   }
 }
+.today-main {
+  padding-bottom: 10px;
+}
 .today-main .header {
   background-color: #1e64a0;
   color: white;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  max-width: 450px !important;
 }
 .today-main .header .first-header {
   display: flex;
@@ -357,9 +363,6 @@ hr {
   color: white;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  position: fixed;
-  top: 0;
-  width: 100%;
 }
 .tripList-outer .tripList-main .header .first-header {
   display: flex;
@@ -434,6 +437,251 @@ hr {
   padding: 3px 0px;
 }
 
-.tp {
-  margin-bottom: 200px !important;
+.waiting {
+  outline: #8f8e94;
+  background-color: #e4e3e5;
+  color: #8f8e94;
+  border: 1px solid #8f8e94;
+  border-radius: 25px;
+  width: 200px;
+  font-size: 13px;
+  padding: 3px 0px;
+}
+
+.scan-main .header {
+  background-color: #1e64a0;
+  color: white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  max-width: 450px !important;
+}
+.scan-main .header .first-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 20px;
+  align-items: center;
+}
+.scan-main .header .first-header .date {
+  padding-left: 15px;
+}
+.scan-main .header .first-header i {
+  padding-left: 4px;
+}
+.scan-main .header .first-header .dot {
+  color: #14446b;
+}
+.scan-main .header .second-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 11px 20px;
+}
+.scan-main .header .second-header i {
+  font-size: 16px;
+}
+.scan-main .header .second-header b {
+  padding-left: 14px;
+}
+.scan-main .header .second-header .first {
+  padding-right: 22px;
+  font-size: 15px;
+}
+.scan-main .header .second-header .second {
+  padding-right: 1px;
+  font-size: 15px;
+}
+.scan-main .body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+}
+.scan-main .body .scan-box {
+  width: 90%;
+  height: 300px;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0px 0px 4px 1px rgba(57, 56, 56, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.scan-main .body .scan-box .scan-1 {
+  width: 100%;
+}
+.scan-main .body .scan-box .scan-1 b {
+  display: block;
+  padding-left: 20px;
+}
+.scan-main .body .scan-box .scan-1 input {
+  display: block;
+  width: 90%;
+  margin: auto;
+  padding: 7px;
+  padding-left: 15px;
+  margin: 10px auto;
+  border-radius: 30px;
+}
+.scan-main .body .scan-box .scan-1 button {
+  display: block;
+  width: 90%;
+  margin: auto;
+  color: white;
+  background-color: #1e64a0;
+  border: none;
+  padding: 7px;
+  margin: 5px auto;
+  border-radius: 30px;
+}
+
+.scanDetail-main .header {
+  background-color: #1e64a0;
+  color: white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  max-width: 450px !important;
+}
+.scanDetail-main .header .first-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 20px;
+  align-items: center;
+}
+.scanDetail-main .header .first-header .date {
+  padding-left: 15px;
+}
+.scanDetail-main .header .first-header i {
+  padding-left: 4px;
+}
+.scanDetail-main .header .first-header .dot {
+  color: #14446b;
+}
+.scanDetail-main .header .second-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 11px 20px;
+}
+.scanDetail-main .header .second-header i {
+  font-size: 16px;
+}
+.scanDetail-main .header .second-header b {
+  padding-left: 14px;
+}
+.scanDetail-main .header .second-header .first {
+  padding-right: 22px;
+  font-size: 15px;
+}
+.scanDetail-main .header .second-header .second {
+  padding-right: 1px;
+  font-size: 15px;
+}
+.scanDetail-main .box1 {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #8f8e94;
+  color: #8f8e94;
+}
+.scanDetail-main .box1 span {
+  color: #111;
+}
+.scanDetail-main .box2 {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  color: #8f8e94;
+}
+.scanDetail-main .box2 span {
+  color: #111;
+}
+
+.scan-1 {
+  width: 100%;
+}
+.scan-1 b {
+  display: block;
+  padding-left: 20px;
+}
+.scan-1 input {
+  display: block;
+  width: 90%;
+  margin: auto;
+  padding: 7px;
+  padding-left: 15px;
+  margin: 10px auto;
+  border-radius: 30px;
+}
+.scan-1 button {
+  display: block;
+  width: 90%;
+  margin: auto;
+  color: white;
+  background-color: #1e64a0;
+  border: none;
+  padding: 7px;
+  margin: 5px auto;
+  border-radius: 30px;
+}
+
+.memberDetail-btn {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  width: 90%;
+  margin: auto;
+  border-radius: 5px;
+  color: black;
+  background-color: white;
+  max-width: 450px !important;
+}
+.memberDetail-btn .memberDetail-btn-1,
+.memberDetail-btn .memberDetail-btn-2 {
+  padding: 10px;
+  background: rgb(255, 0, 0);
+  color: white;
+  width: 45% !important;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.memberDetail-btn .memberDetail-btn-2 {
+  margin-left: 10px;
+}
+
+.am_on_bus {
+  background: green !important;
+  padding: 10px;
+  color: white;
+  width: 45% !important;
+  border-radius: 30px;
+  font-size: 14px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.scan {
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+  border-radius: 5px;
+  color: black;
+  background-color: white;
+  max-width: 450px !important;
+}
+.scan .scan-member {
+  width: 90%;
+  padding: 10px;
+  border-radius: 30px;
+  color: white;
+  background-color: #1e64a0;
+  margin: auto;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.scan .scan-member i {
+  padding-right: 10px;
+}
+.scan .scan-member b {
+  padding-left: 10px;
 }/*# sourceMappingURL=App.css.map */

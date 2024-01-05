@@ -25,6 +25,18 @@ export const tripMembers = createAsyncThunk("tripMembers", async (id) => {
   return response.data;
 });
 
+// export const memberId = createAsyncThunk("memberId", async (id) => {
+//   const response = await api.post(`/api-staff/trips/members`);
+//   console.log(response);
+//   return response.data;
+// });
+
+export const scanDetail = createAsyncThunk("scanDetail", async (id) => {
+  const response = await api.get(`/api-staff/trips/members/${id}`);
+  console.log(response);
+  return response.data;
+});
+
 const projectSlice = createSlice({
   name: "project",
   initialState: {
@@ -32,6 +44,7 @@ const projectSlice = createSlice({
     trips: [],
     tripMembers: [],
     tripDetail: [],
+    scanDetail: [],
     error: null,
   },
   extraReducers: (builder) => {
@@ -50,6 +63,10 @@ const projectSlice = createSlice({
       })
       .addCase(tripDetail.fulfilled, (state, action) => {
         state.tripDetail = action.payload;
+        state.error = null;
+      })
+      .addCase(scanDetail.fulfilled, (state, action) => {
+        state.scanDetail = action.payload;
         state.error = null;
       });
   },

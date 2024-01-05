@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { tripDetail } from "../Stores/Slices";
 import TripListTab from "./TripListTab";
+import ModalWindow from "./ModalWindow";
+// import ModalWindow from "./ModalWindow";
 
 function TripList() {
   const { id } = useParams();
@@ -25,9 +27,13 @@ function TripList() {
     navigate("/today");
   };
 
+  const scanMember = () => {
+    navigate("/scanMember");
+  };
+
   return (
-    <div className="tripList-outer pt-5">
-      <div className="tripList-main pt-5 pb-0">
+    <div className="tripList-outer ">
+      <div className="tripList-main ">
         <div className="header mb-3">
           <div className="first-header">
             <span className="date">
@@ -119,13 +125,16 @@ function TripList() {
         </div>
 
         <div className="footer">
-          <div className="scan-member">
+          {/* <ModalWindow /> */}
+          <div className="scan-member" onClick={() => scanMember()}>
             <i className="fa-solid fa-qrcode first"></i>
 
             <b>Scan Member</b>
           </div>
           <hr />
         </div>
+
+        {/* <ModalWindow /> */}
       </div>
     </div>
   );
