@@ -6,15 +6,19 @@ import TripListTab from "./TripListTab";
 import ModalWindow from "./ModalWindow";
 // import ModalWindow from "./ModalWindow";
 
-function TripList() {
+function TripList({ sendData }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [tripData, setTripData] = useState();
+  const [sendTripData, setSendTripData] = useState();
+
+  sendData(sendTripData);
 
   const Members = () => {
     dispatch(tripDetail(id)).then((res) => {
       setTripData(res.payload.data.trip);
+      setSendTripData(res.payload.data.trip_locations);
       console.log(res, "trips");
     });
   };

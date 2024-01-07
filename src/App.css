@@ -684,4 +684,24 @@ hr {
 }
 .scan .scan-member b {
   padding-left: 10px;
+}
+
+.modalTab {
+  padding: 12px;
+  border-bottom: 1px solid #d1d1d3;
+}
+
+.modalTab1 {
+  padding: 12px;
+}
+
+.modalB {
+  padding: 12px 0px;
+  font-size: 18px;
+}
+
+.modal-btn {
+  color: #1e64a0;
+  padding: 12px 10px;
+  cursor: pointer;
 }/*# sourceMappingURL=App.css.map */

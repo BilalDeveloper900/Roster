@@ -25,11 +25,13 @@ export const tripMembers = createAsyncThunk("tripMembers", async (id) => {
   return response.data;
 });
 
-// export const memberId = createAsyncThunk("memberId", async (id) => {
-//   const response = await api.post(`/api-staff/trips/members`);
-//   console.log(response);
-//   return response.data;
-// });
+export const changeTime = createAsyncThunk("changeTime", async () => {
+  const response = await api.post(
+    "api-staff/trips/members/update-boarding-status"
+  );
+  console.log(response);
+  return response.data;
+});
 
 export const scanDetail = createAsyncThunk("scanDetail", async (id) => {
   const response = await api.get(`/api-staff/trips/members/${id}`);
@@ -45,8 +47,24 @@ const projectSlice = createSlice({
     tripMembers: [],
     tripDetail: [],
     scanDetail: [],
+    changeTime: [],
     error: null,
+    id: null,
+    fetchedData: null,
   },
+  reducers: {
+    setId: (state, action) => {
+      state.id = action.payload;
+    },
+    setFetchedData: (state, action) => {
+      state.fetchedData = action.payload;
+    },
+    updateData: (state, action) => {
+      // Perform the update logic here
+      state.fetchedData = action.payload;
+    },
+  },
+
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, action) => {
@@ -65,6 +83,10 @@ const projectSlice = createSlice({
         state.tripDetail = action.payload;
         state.error = null;
       })
+      .addCase(changeTime.fulfilled, (state, action) => {
+        state.changeTime = action.payload;
+        state.error = null;
+      })
       .addCase(scanDetail.fulfilled, (state, action) => {
         state.scanDetail = action.payload;
         state.error = null;
@@ -72,3 +94,7 @@ const projectSlice = createSlice({
   },
 });
 export default projectSlice.reducer;
+
+export const { setId, setFetchedData, updateData } = projectSlice.actions;
+export const selectId = (state) => state.data.id;
+export const selectFetchedData = (state) => state.data.fetchedData;
