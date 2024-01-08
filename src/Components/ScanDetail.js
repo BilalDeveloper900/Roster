@@ -7,38 +7,46 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
 function ScanDetail({ receivedData }) {
-  console.log(receivedData.trip_id, " received.....Data ");
-  const tripId = receivedData.trip_id;
-  console.log(tripId);
+  console.log(receivedData, " received....Data ");
+  const receivedData2 = receivedData.slice(0, 1);
+
+  // const idValue = receivedData2[0].id;
+  // console.log(idValue, "idValue");
+  const tripId = receivedData2[0].trip_id;
+  console.log(tripId, "tripId");
+  // const title = receivedData2[0].title;
+  // console.log(title, "title");
+  // const busses = receivedData2[0];
+  // console.log(busses, "busses");
 
   const { id } = useParams();
+
+  const memberId = id;
+  console.log(memberId);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [detail, setDetail] = useState();
   const [status, setStatus] = useState("AM-ON-BUS");
   const [statusAM, setStatusAM] = useState("AM-ON-BUS");
   const [statusPM, setStatusPM] = useState("PM-RETURN");
-  const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
   const [show, setShow] = useState(false);
   const [updateShow, setUpdateShow] = useState(false);
-  const [memberData, setMemberData] = useState();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleUpdateClose = () => setUpdateShow(false);
+  const [selectedCheckbox, setSelectedCheckbox] = useState(null);
+
   const handleUpdateShow = () => {
     setUpdateShow(true);
     setShow(false);
+    const selectedCheckboxId = selectedCheckbox;
+    console.log("Location ID:", selectedCheckboxId);
   };
 
   const handleCheckboxChange = (id) => {
-    setSelectedCheckboxes((prevSelectedCheckboxes) => {
-      if (prevSelectedCheckboxes.includes(id)) {
-        return prevSelectedCheckboxes.filter((checkboxId) => checkboxId !== id);
-      } else {
-        return [...prevSelectedCheckboxes, id];
-      }
-    });
+    setSelectedCheckbox(id);
   };
 
   const Members = () => {
@@ -47,16 +55,12 @@ function ScanDetail({ receivedData }) {
     });
   };
 
-  // const firstMember = () => {
-  //   dispatch(tripMembers(tripId)).then((res) => {
-  //     setMemberData(res.payload.data.all_members);
-  //     console.log(memberData, "member---data");
-  //   });
-  // };
-
   const handleUpdate = () => {
     const payload = {
-      selectedCheckboxes,
+      status: status,
+      memberId: memberId,
+      tripId: tripId,
+      selectedCheckbox: selectedCheckbox,
     };
 
     const ChangeTime = () => {
@@ -64,8 +68,12 @@ function ScanDetail({ receivedData }) {
         console.log(changeTime, "change----Time");
       });
     };
+    // ChangeTime();
+    console.log("status:", status);
+    console.log("memberId:", memberId);
+    console.log("tripId:", tripId);
+    console.log("selectedCheckbox:", selectedCheckbox);
 
-    console.log("Selected Checkboxes:", selectedCheckboxes);
     setUpdateShow(false);
     setStatus(statusAM);
   };
@@ -194,7 +202,10 @@ function ScanDetail({ receivedData }) {
               <div className="box2">
                 <b>Status:</b>
                 <span>
-                  <b>{status}</b>
+                  <b>
+                    {/* {receive[0].id} */}
+                    {status}
+                  </b>
                 </span>
               </div>
             </div>
@@ -233,51 +244,14 @@ function ScanDetail({ receivedData }) {
           <Modal.Body>
             <b className="modalB">Select Buss Stop</b>
             <Form>
-              {["checkbox"].map((type) => (
-                <div key={`default-${type}`} className="mb-3">
+              {receivedData.map((item) => (
+                <div key={item.id} className="mb-3">
                   <Form.Check
-                    type={type}
-                    id="Kenilworth"
-                    label="Kenilworth"
+                    id={item.id}
+                    label={item.title}
                     className="modalTab"
-                    checked={selectedCheckboxes.includes("Kenilworth")}
-                    onChange={() => handleCheckboxChange("Kenilworth")}
-                  />
-
-                  <Form.Check
-                    type={type}
-                    id="Northbrook"
-                    label="Northbrook"
-                    className="modalTab"
-                    checked={selectedCheckboxes.includes("Northbrook")}
-                    onChange={() => handleCheckboxChange("Northbrook")}
-                  />
-
-                  <Form.Check
-                    type={type}
-                    id="Wilmette"
-                    className="modalTab"
-                    label="Wilmette"
-                    checked={selectedCheckboxes.includes("Wilmette")}
-                    onChange={() => handleCheckboxChange("Wilmette")}
-                  />
-
-                  <Form.Check
-                    type={type}
-                    id="Highland"
-                    label="Highland Park"
-                    className="modalTab"
-                    checked={selectedCheckboxes.includes("Highland")}
-                    onChange={() => handleCheckboxChange("Highland")}
-                  />
-
-                  <Form.Check
-                    type={type}
-                    id="Lake"
-                    label="Lake"
-                    className="modalTab1"
-                    checked={selectedCheckboxes.includes("Lake")}
-                    onChange={() => handleCheckboxChange("Lake")}
+                    checked={selectedCheckbox === item.id}
+                    onChange={() => handleCheckboxChange(item.id)}
                   />
                 </div>
               ))}
@@ -302,9 +276,23 @@ function ScanDetail({ receivedData }) {
             keyboard={false}
           >
             <Modal.Header>
-              <Modal.Title>Update</Modal.Title>
+              <Modal.Title>Busses</Modal.Title>
             </Modal.Header>
-            <Modal.Body>You want to update this?</Modal.Body>
+            <Modal.Body>
+              <Form>
+                {receivedData.flatMap((trip) =>
+                  trip.busses.map((bus) => (
+                    <div key={bus.id} className="mb-3">
+                      <Form.Check
+                        id={bus.id}
+                        label={bus.name}
+                        className="modalTab"
+                      />
+                    </div>
+                  ))
+                )}
+              </Form>
+            </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleUpdateClose}>
                 NO
