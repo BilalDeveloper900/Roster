@@ -7,22 +7,16 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
 function ScanDetail({ receivedData }) {
-  console.log(receivedData, " received....Data ");
+  // console.log(receivedData, " received....Data ");
   const receivedData2 = receivedData.slice(0, 1);
 
-  // const idValue = receivedData2[0].id;
-  // console.log(idValue, "idValue");
   const tripId = receivedData2[0].trip_id;
-  console.log(tripId, "tripId");
-  // const title = receivedData2[0].title;
-  // console.log(title, "title");
-  // const busses = receivedData2[0];
-  // console.log(busses, "busses");
+  // console.log(tripId, "tripId");
 
   const { id } = useParams();
 
   const memberId = id;
-  console.log(memberId);
+  // console.log(memberId);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -42,7 +36,7 @@ function ScanDetail({ receivedData }) {
     setUpdateShow(true);
     setShow(false);
     const selectedCheckboxId = selectedCheckbox;
-    console.log("Location ID:", selectedCheckboxId);
+    // console.log("Location ID:", selectedCheckboxId);
   };
 
   const handleCheckboxChange = (id) => {
@@ -56,23 +50,21 @@ function ScanDetail({ receivedData }) {
   };
 
   const handleUpdate = () => {
+    console.log("status:", status);
+    console.log("member_id:", memberId);
+    console.log("trip_id:", tripId);
+    console.log("location_id:", selectedCheckbox);
+
     const payload = {
       status: status,
-      memberId: memberId,
-      tripId: tripId,
-      selectedCheckbox: selectedCheckbox,
+      member_id: memberId,
+      trip_id: tripId,
+      location_id: selectedCheckbox,
     };
 
-    const ChangeTime = () => {
-      dispatch(changeTime(payload)).then((res) => {
-        console.log(changeTime, "change----Time");
-      });
-    };
-    // ChangeTime();
-    console.log("status:", status);
-    console.log("memberId:", memberId);
-    console.log("tripId:", tripId);
-    console.log("selectedCheckbox:", selectedCheckbox);
+    dispatch(changeTime(payload)).then((res) => {
+      console.log(res, "change----Time");
+    });
 
     setUpdateShow(false);
     setStatus(statusAM);

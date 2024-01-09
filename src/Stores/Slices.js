@@ -25,9 +25,10 @@ export const tripMembers = createAsyncThunk("tripMembers", async (id) => {
   return response.data;
 });
 
-export const changeTime = createAsyncThunk("changeTime", async () => {
+export const changeTime = createAsyncThunk("changeTime", async (payload) => {
   const response = await api.post(
-    "api-staff/trips/members/update-boarding-status"
+    "api-staff/trips/members/update-boarding-status",
+    payload
   );
   console.log(response);
   return response.data;
