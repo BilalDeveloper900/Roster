@@ -622,7 +622,8 @@ hr {
   border-radius: 30px;
 }
 
-.memberDetail-btn {
+.memberDetail-btn-first,
+.memberDetail-btn-second {
   text-align: center;
   justify-content: center;
   display: flex;
@@ -633,8 +634,10 @@ hr {
   background-color: white;
   max-width: 450px !important;
 }
-.memberDetail-btn .memberDetail-btn-1,
-.memberDetail-btn .memberDetail-btn-2 {
+.memberDetail-btn-first .memberDetail-btn-1,
+.memberDetail-btn-first .memberDetail-btn-2,
+.memberDetail-btn-second .memberDetail-btn-1,
+.memberDetail-btn-second .memberDetail-btn-2 {
   padding: 10px;
   background: rgb(255, 0, 0);
   color: white;
@@ -642,8 +645,11 @@ hr {
   border-radius: 30px;
   font-size: 14px;
   cursor: pointer;
+  outline: none;
+  border: none;
 }
-.memberDetail-btn .memberDetail-btn-2 {
+.memberDetail-btn-first .memberDetail-btn-2,
+.memberDetail-btn-second .memberDetail-btn-2 {
   margin-left: 10px;
 }
 
@@ -656,6 +662,8 @@ hr {
   font-size: 14px;
   margin-left: 10px;
   cursor: pointer;
+  outline: none;
+  border: none;
 }
 
 .scan {

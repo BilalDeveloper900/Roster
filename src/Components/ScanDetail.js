@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import { toast } from "react-toastify";
 
 function ScanDetail({ receivedData }) {
   // console.log(receivedData, " received....Data ");
@@ -24,17 +25,24 @@ function ScanDetail({ receivedData }) {
   const [status, setStatus] = useState("AM-ON-BUS");
   const [statusAM, setStatusAM] = useState("AM-ON-BUS");
   const [statusPM, setStatusPM] = useState("PM-RETURN");
+  const [statusParent, setStatusParent] = useState("PARENT PICKED UP");
+  const [statusNo, setStatusNo] = useState("NO SHOW");
   const [show, setShow] = useState(false);
   const [updateShow, setUpdateShow] = useState(false);
+  const [hide, setHide] = useState(true);
+  const [showPM, setShowPM] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleClosePM = () => setShowPM(false);
+  const handleShowPM = () => setShowPM(true);
   const handleUpdateClose = () => setUpdateShow(false);
   const [selectedCheckbox, setSelectedCheckbox] = useState(null);
 
   const handleUpdateShow = () => {
     setUpdateShow(true);
     setShow(false);
+    setStatus(statusAM);
     const selectedCheckboxId = selectedCheckbox;
     // console.log("Location ID:", selectedCheckboxId);
   };
@@ -64,6 +72,7 @@ function ScanDetail({ receivedData }) {
 
     dispatch(changeTime(payload)).then((res) => {
       console.log(res, "change----Time");
+      toast.success("Status update successfully");
     });
 
     setUpdateShow(false);
@@ -71,11 +80,46 @@ function ScanDetail({ receivedData }) {
   };
 
   const handleStatusAM = () => {
-    setStatus(statusPM);
+    setHide(true);
+    handleShow();
   };
 
   const handleStatusPM = () => {
-    handleShow();
+    setStatus(statusPM);
+    setHide(false);
+    handleShowPM();
+  };
+
+  const handleStatusParent = () => {
+    setStatus(statusParent);
+    setHide(false);
+    handleShowPM();
+  };
+
+  const handleStatusNo = () => {
+    setStatus(statusNo);
+    setHide(true);
+    handleShowPM();
+  };
+
+  const handleUpdatePM = () => {
+    console.log("status:", status);
+    console.log("member_id:", memberId);
+    console.log("trip_id:", tripId);
+
+    const payload = {
+      status: status,
+      member_id: memberId,
+      trip_id: tripId,
+    };
+
+    dispatch(changeTime(payload)).then((res) => {
+      console.log(res, "change----Time");
+      toast.success("Status update successfully");
+    });
+
+    setUpdateShow(false);
+    handleClosePM();
   };
 
   useEffect(() => {
@@ -203,19 +247,40 @@ function ScanDetail({ receivedData }) {
             </div>
           </div>
 
-          <div className="memberDetail-btn pt-4">
-            <span className="memberDetail-btn-1" onClick={handleStatusAM}>
-              {status === "AM-ON-BUS" ? "PM-RETURN" : "NO-SHOW"}
-            </span>
-            <span
-              className={`${
-                status === "AM-ON-BUS" ? "memberDetail-btn-2" : "am_on_bus"
-              }`}
-              onClick={() => status === "PM-RETURN" && handleStatusPM()}
-            >
-              {status === "AM-ON-BUS" ? "PARENT PICKED UP" : "AM-ON-BUS"}
-            </span>
-          </div>
+          {hide === true ? (
+            <div className="memberDetail-btn-first pt-4">
+              <button
+                className="memberDetail-btn-1"
+                onClick={() => handleStatusPM()}
+              >
+                PM-RETURN
+              </button>
+              <button
+                className="memberDetail-btn-2"
+                onClick={() => handleStatusParent()}
+              >
+                PARENT PICKED UP
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
+
+          {hide === false ? (
+            <div className="memberDetail-btn-second pt-4">
+              <button
+                className="memberDetail-btn-1"
+                onClick={() => handleStatusNo()}
+              >
+                NO-SHOW
+              </button>
+              <button className="am_on_bus" onClick={() => handleStatusAM()}>
+                AM-ON-BUS
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
 
           <div className="scan pt-2">
             <div className="scan-member" onClick={() => scanMember()}>
@@ -273,15 +338,13 @@ function ScanDetail({ receivedData }) {
             <Modal.Body>
               <Form>
                 {receivedData.flatMap((trip) =>
-                  trip.busses.map((bus) => (
-                    <div key={bus.id} className="mb-3">
-                      <Form.Check
-                        id={bus.id}
-                        label={bus.name}
-                        className="modalTab"
-                      />
-                    </div>
-                  ))
+                  trip.busses
+                    .filter(() => selectedCheckbox === trip.id)
+                    .map((bus) => (
+                      <div key={bus.id} className="mb-3">
+                        <Form.Check id={bus.id} label={bus.name} />
+                      </div>
+                    ))
                 )}
               </Form>
             </Modal.Body>
@@ -295,6 +358,29 @@ function ScanDetail({ receivedData }) {
             </Modal.Footer>
           </Modal>
         </div>
+
+        <Modal
+          show={showPM}
+          onHide={handleClosePM}
+          backdrop="static"
+          keyboard={false}
+          centered
+        >
+          <Modal.Body>
+            <b>
+              Do You want to update status in to{" "}
+              <span id="color">{status}</span>
+            </b>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClosePM}>
+              NO
+            </Button>
+            <Button variant="primary" onClick={handleUpdatePM}>
+              Yes
+            </Button>
+          </Modal.Footer>
+        </Modal>
 
         <div className="footer">
           <hr />

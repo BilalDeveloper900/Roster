@@ -8,6 +8,8 @@ import TripList from "./Components/TripList";
 import ScanMember from "./Components/ScanMember";
 import ScanDetail from "./Components/ScanDetail";
 import { useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [receivedData, setReceivedData] = useState("");
@@ -17,22 +19,36 @@ function App() {
   };
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/today" element={<Today />} />
-        <Route
-          path="/tripList/:id"
-          element={<TripList sendData={receiveDataHandler} />}
-        />
-        <Route path="/scanMember" element={<ScanMember />} />
-        <Route
-          path="/scanDetail/:id"
-          element={<ScanDetail receivedData={receivedData} />}
-        />
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/today" element={<Today />} />
+          <Route
+            path="/tripList/:id"
+            element={<TripList sendData={receiveDataHandler} />}
+          />
+          <Route path="/scanMember" element={<ScanMember />} />
+          <Route
+            path="/scanDetail/:id"
+            element={<ScanDetail receivedData={receivedData} />}
+          />
+        </Routes>
+      </Router>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    </>
   );
 }
 

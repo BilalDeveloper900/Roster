@@ -19,7 +19,7 @@ function TripList({ sendData }) {
     dispatch(tripDetail(id)).then((res) => {
       setTripData(res.payload.data.trip);
       setSendTripData(res.payload.data.trip_locations);
-      console.log(res, "trips");
+      console.log(res.payload.data, "trips");
     });
   };
 

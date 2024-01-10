@@ -720,7 +720,8 @@ hr {
   }
 }
 
-.memberDetail-btn {
+.memberDetail-btn-first,
+.memberDetail-btn-second {
   text-align: center;
   justify-content: center;
   display: flex;
@@ -740,12 +741,15 @@ hr {
     border-radius: 30px;
     font-size: 14px;
     cursor: pointer;
+    outline: none;
+    border: none;
   }
 
   .memberDetail-btn-2 {
     margin-left: 10px;
   }
 }
+
 .am_on_bus {
   background: green !important;
   padding: 10px;
@@ -755,6 +759,8 @@ hr {
   font-size: 14px;
   margin-left: 10px;
   cursor: pointer;
+  outline: none;
+  border: none;
 }
 
 .scan {
