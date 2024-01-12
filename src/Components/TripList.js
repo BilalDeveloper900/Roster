@@ -37,7 +37,7 @@ function TripList({ sendData }) {
 
   return (
     <div className="tripList-outer ">
-      <div className="tripList-main ">
+      <div className="tripList-main pb-3">
         <div className="header mb-3">
           <div className="first-header">
             <span className="date">

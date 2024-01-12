@@ -136,6 +136,8 @@ function ScanDetail({ receivedData }) {
     navigate("/today");
   };
 
+  const backHome = () => [navigate("/dashboard")];
+
   return (
     <div className="scanDetail-main">
       <div className="scanDetail">
@@ -178,7 +180,11 @@ function ScanDetail({ receivedData }) {
 
             <span>
               <i className="fa-solid fa-qrcode first"></i>
-              <i className="fa fa-home second" aria-hidden="true"></i>
+              <i
+                className="fa fa-home second"
+                aria-hidden="true"
+                onClick={backHome}
+              ></i>
             </span>
           </div>
         </div>
